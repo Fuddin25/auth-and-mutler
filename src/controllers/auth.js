@@ -40,7 +40,7 @@ exports.register = async (req, res) => {
     });
 
     // generate token
-    const token = jwt.sign({ id: user.id }, process.env.TOKEN_KEY);
+    const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY);
     
     res.status(200).send({
       status: "success...",
@@ -98,7 +98,7 @@ exports.login = async (req, res) => {
     }
 
     // generate token
-    const token = jwt.sign({ id: userExist.id }, process.env.TOKEN_KEY);
+    const token = jwt.sign({ id: userExist.id }, process.env.SECRET_KEY);
 
     res.status(200).send({
       status: "success...",
