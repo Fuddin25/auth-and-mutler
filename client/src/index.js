@@ -7,16 +7,23 @@ import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { UserContextProvider } from './context/userContext'
 
+// Init QueryClient and QueryClientProvider here ...
+import { QueryClient, QueryClientProvider } from "react-query";
+
 // favicon
 import Favicon from './assets/DumbMerch.png'
 const favicon = document.getElementById('idFavicon')
 favicon.setAttribute('href', Favicon)
 
+// init Client from QueryClient() here ...
+const client = new QueryClient();
 
 ReactDOM.render(
   <React.StrictMode>
     <UserContextProvider>
-      <App />
+      <QueryClient client={client}>
+        <App />
+      </QueryClient>
     </UserContextProvider>
   </React.StrictMode>,
   document.getElementById('root')
