@@ -24,28 +24,53 @@ export default function UpdateProductAdmin() {
 
   // Create Variabel for store product data here ...
   const [form, setForm] = useState({
-    image: '',
-    name: '',
-    desc: '',
-    price: '',
-    qty: '',
-  }); //Store product data
+    image: "",
+    name: "",
+    desc: "",
+    price: "",
+    qty: "",
+  }); // Store product data
 
   // Fetching detail product data by id from database
-let { data: products, refetch } = useQuery('productCache', async () => {
-  const response = await API.get('/product/' + id);
+let { data: products, refetch } = useQuery("productCache", async () => {
+  const response = await API.get("/product/" + id);
   return response.data.data;
 });
 
 // Fetching category data
+// let { data: categoriesData, refetch: refetchCategories } = useQuery(
+//   'categoriesCache',
+//   async () => {
+//     const response = await API.get('/categories');
+//     return response.data.data;
+//   }
+// );
+// Fetching category data
 let { data: categoriesData, refetch: refetchCategories } = useQuery(
-  'categoriesCache',
+  "categoriesCache",
   async () => {
-    const response = await API.get('/categories');
+    const response = await API.get("/categories");
     return response.data.data;
   }
 );
 
+// useEffect(() => {
+//   if (products) {
+//     setPreview(products.image);
+//     setForm({
+//       ...form,
+//       name: products.name,
+//       desc: products.desc,
+//       price: products.price,
+//       qty: products.qty,
+//     });
+//     setProduct(products);
+//   }
+
+//   if (categoriesData) {
+//     setCategories(categoriesData);
+//   }
+// }, [products]);
 useEffect(() => {
   if (products) {
     setPreview(products.image);
@@ -64,22 +89,23 @@ useEffect(() => {
   }
 }, [products]);
 
+  
   // Create function for handle if category selected here ...
   // For handle if category selected
 const handleChangeCategoryId = (e) => {
-  const id = e.target.value;
-  const checked = e.target.checked;
+   const id = e.target.value;
+   const checked = e.terget.checked;
 
-  if (checked == true) {
+   if (checked == true) {
     // Save category id if checked
-    setCategoryId([...categoryId, parseInt(id)]);
-  } else {
+    setCategoryId([...categoryId, perseInt(id)]);
+   } else {
     // Delete category id from variable if unchecked
     let newCategoryId = categoryId.filter((categoryIdItem) => {
       return categoryIdItem != id;
     });
     setCategoryId(newCategoryId);
-  }
+   }
 };
 
   // Create function for handle change data on form here ...
@@ -88,11 +114,11 @@ const handleChangeCategoryId = (e) => {
       setForm({
         ...form,
         [e.target.name]:
-          e.target.type === 'file' ? e.target.files : e.target.value,
+          e.target.type === "file" ? e.target.files : e.target.value,
       });
 
       // Create image url for preview
-      if (e.target.type === 'file') {
+      if (e.target.type === "file") {
         let url = URL.createObjectURL(e.target.files[0]);
         setPreview(url);
       }

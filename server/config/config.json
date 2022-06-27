@@ -1,11 +1,10 @@
 {
   "development": {
-    "username": "postgres",
+    "username": "root",
     "password": "root",
-    "database": "b35_dumbmerch",
+    "database": "integrasi-b35",
     "host": "localhost",
-    "port": "5432",
-    "dialect": "postgres"
+    "dialect": "mysql"
   },
   "test": {
     "username": "root",
