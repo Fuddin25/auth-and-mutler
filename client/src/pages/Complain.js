@@ -21,10 +21,16 @@ export default function Complain() {
     useEffect(() =>{
         socket = io('http://localhost:5000', {
             // code here
+            auth: {
+                token: localstorage.getItem("token")
+            }
         })
         loadContact()
 
         // code here
+        socket.on("connect_error", (error) => {
+            console.log(error);
+        });
 
         return () => {
             socket.disconnect()
@@ -43,7 +49,7 @@ export default function Complain() {
                 ...data, 
                 message: "Click here to start message"
             }
-            setContacts([dataContact])
+            setContacts(dataContact)
         })
     }
 

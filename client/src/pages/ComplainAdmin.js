@@ -39,7 +39,7 @@ export default function ComplainAdmin() {
             
             // manipulate customers to add message property
             dataContacts = dataContacts.map((item) => ({
-                ...item,
+                ...item, 
                 message: "Click here to start message"
             }))
 
