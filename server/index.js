@@ -5,6 +5,8 @@ const express = require('express')
 const cors = require('cors')
 
 // import here
+const http = requrie("http");
+const { Server } = require("socket.io");
 
 // Get routes to the variabel
 const router = require('./src/routes')
@@ -12,6 +14,13 @@ const router = require('./src/routes')
 const app = express()
 
 // code here
+// add after server initialization
+const server = http.createServer(app);
+const io = new Server(server, {
+    cors: {
+        origin: "http://localhost:3000" // define client origin if both client and server have different origin
+    }
+});
 
 const port = 5000
 
@@ -19,8 +28,8 @@ app.use(express.json())
 app.use(cors())
 
 // Add endpoint grouping and router
-app.use('/api/v1/', router)
-app.use('/uploads', express.static('uploads'))
+app.use("/api/v1/", router);
+app.use("/uploads", express.static("uploads"));
 
 // change app to server
-app.listen(port, () => console.log(`Listening on port ${port}!`))
+server.listen(port, () => console.log(`Listening on port ${port}!`))
