@@ -21,11 +21,16 @@ export default function ProductAdmin() {
   // Create variabel for id product and confirm delete data with useState here ...
   const [idDelete, setIdDelete] = useState(null);
   const [confirmDelete, setConfirmDelete] = useState(null);
+  // const [idDelete, setIdDelete] = useState(null);
+  // const [confirmDelet, setConfirmDelete] = useState(null);
 
   // Create init useState & function for handle show-hide modal confirm here ...
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  // const [ show, setShow ] = useState(false);
+  // const handleClose = () => setShow(false);
+  // const handleShow = () => setShow(false);
 
   let { data: products, refetch } = useQuery('productsCache', async () => {
     const response = await API.get('/products');
@@ -45,6 +50,10 @@ export default function ProductAdmin() {
     setIdDelete(id);
     handleShow();
   };
+  // const handleDelete = (id) => {
+  //   setIdDelete(id);
+  //   handleShow();
+  // };
   
 
   // Create function for handle delete product here ...
@@ -57,6 +66,14 @@ export default function ProductAdmin() {
       console.log(error);
     }
   });
+  // const deleteById = useMutation(async (id) => {
+  //   try {
+  //     await API.delete(`/product/${id}`);
+  //     refetch();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // });
 
   // Call function for handle close modal and execute delete data with useEffect here ...
   useEffect(() => {
@@ -68,6 +85,13 @@ export default function ProductAdmin() {
       setConfirmDelete(null);
     }
   }, [confirmDelete]);
+  // useEffect(() => {
+  //   if (confirmDelete) {
+  //     handleClose();
+  //     deleteById.mutate(idDelete);
+  //     setConfirmDelete(null);
+  //   }
+  // }, [confirmDelete]);
 
   return (
     <>

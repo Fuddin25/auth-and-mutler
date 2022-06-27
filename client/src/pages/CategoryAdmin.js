@@ -19,11 +19,16 @@ export default function CategoryAdmin() {
   // Create variabel for id product and confirm delete data with useState here ...
   const [idDelete, setIdDelete] = useState(null);
   const [confirmDelete, setConfirmDelete] = useState(null);
+  // const [ idDelete, setIdDelete ] = useState(null);
+  // const [ confirmDelete, setConfirmDelete ] = useState(null);
 
   // Create init useState & function for handle show-hide modal confirm here ...
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  // const [ show, setShow ] = useState(false);
+  // const handleClose = () => setShow(false);
+  // const handleShow = () => setShow(true);
 
   let { data: categories, refetch } = useQuery('categoriesCache', async () => {
     const response = await API.get('/categories');
@@ -39,6 +44,10 @@ export default function CategoryAdmin() {
     setIdDelete(id);
     handleShow();
   };
+  // const handleDelete = (id) => {
+  //   setIdDelete(id);
+  //   handleShow();
+  // };
 
   // Create function for handle delete product here ...
   // If confirm is true, execute delete data
@@ -50,6 +59,14 @@ export default function CategoryAdmin() {
       console.log(error);
     }
   });
+  // const deleteById = useMutation(async (id) => {
+  //   try {
+  //     await API.delete(`/category/${id}`);
+  //     refetch();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // });
 
   // Call function for handle close modal and execute delete data with useEffect here ...
   useEffect(() => {
@@ -61,10 +78,20 @@ export default function CategoryAdmin() {
       setConfirmDelete(null);
     }
   }, [confirmDelete]);
+  // useEffect(() => {
+  //   if (confirmDelete) {
+  //     handleClose();
+  //     deleteById.mutate(idDelete);
+  //     setConfirmDelete(null);
+  //   }
+  // }, [confirmDelete]);
 
   const addCategory = () => {
     navigate('/add-category');
   };
+  // const addCategory = () => {
+  //   navigate("/add-category");
+  // };
 
   return (
     <>
