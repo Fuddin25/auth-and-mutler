@@ -1,9 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": null,
-    "database": "course-express",
-    "host": "127.0.0.1",
+    "password": "root",
+    "database": "integrasi-b35",
     "dialect": "mysql"
   },
   "test": {

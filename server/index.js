@@ -21,6 +21,9 @@ const io = new Server(server, {
 })
 
 // import here
+// const socketIo = require("./src/socket");
+// socketIo(io);
+require("./src/socket")(io);
 
 const port = 5000
 
