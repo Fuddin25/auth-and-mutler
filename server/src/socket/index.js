@@ -61,6 +61,9 @@ const socketIo = (io) => {
           where: {
             status: 'customer'
           },
+          // where: { 
+          //   status: "customer" 
+          // },
           include: [
             {
               model: profile,
@@ -87,7 +90,7 @@ const socketIo = (io) => {
           attributes: {
             exclude: ["createdAt", "updatedAt", "password"],
           },
-        })
+        }) 
 
         customerContacts = JSON.parse(JSON.stringify(customerContacts))
         customerContacts = customerContacts.map((item) => ({

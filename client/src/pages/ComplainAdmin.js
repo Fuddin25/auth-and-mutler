@@ -8,8 +8,10 @@ import Contact from '../components/complain/Contact'
 
 // import here
 import Chat from '../components/complain/Chat'
+// import Chat from "../components/complain/Chat";
 
 import { UserContext } from '../context/userContext'
+// import { UserContext } from "../context/userContext";
 
 // import socket.io-client 
 import {io} from 'socket.io-client'
@@ -21,12 +23,14 @@ export default function ComplainAdmin() {
     const [contacts, setContacts] = useState([])
     // code here
     const [messages, setMessages] = useState([])
+    // const [messages, setMessages] = useState([]);
 
     const title = "Complain admin"
     document.title = 'DumbMerch | ' + title
 
     // code here
     const [state] = useContext(UserContext)
+    // const [state] = useContext(UserContext);
 
     useEffect(() =>{
         socket = io('http://localhost:5000', {
@@ -39,15 +43,20 @@ export default function ComplainAdmin() {
         socket.on("new message", () => {
             socket.emit('load messages', contact?.id)
         })
+        // socket.on("new message", () => {
+        //     socket.emit("load messages", contact?.id);
+        // });
 
         loadContacts()
         // code here
         loadMessages()
+        // loadContacts();
+        // loadMessages();
 
         return () => {
             socket.disconnect()
         }
-    }, [messages]) // code here
+    }, [messages]) // code here messages
 
     const loadContacts = () => {
         socket.emit("load customer contacts")
@@ -57,10 +66,16 @@ export default function ComplainAdmin() {
                 ...item,
                 message: item.senderMessage.length > 0 ? item.senderMessage[item.senderMessage.length - 1].message : 'Click here to start message'
             }))
-            
+
             // manipulate customers to add message property with the newest message
             // code here
             setContacts(dataContacts)
+            
+            // let dataContacts = data.map((item) => ({
+            //     ...item,
+            //     message: item.senderMessage.length > 0 ? item.senderMessage[item.senderMessage.length - 1].message : "Click here to start message"
+            // }));
+            // setContacts(dataContacts);
         })
     }
 
@@ -69,6 +84,7 @@ export default function ComplainAdmin() {
         setContact(data)
         // code here
         socket.emit('load messages', data.id)
+        // socket.emit("load messages", data.id);
     }
 
     // code here
@@ -88,6 +104,21 @@ export default function ComplainAdmin() {
             }
         })
     }
+    // const loadMessages = () => {
+    //     socket.on("messages", async (data) => {
+    //         if (data.length > 0) {
+    //             const dataMessages = data.map((item) => ({
+    //                 idSender: item.sender.id,
+    //                 message: item.message         
+    //             }));
+    //             setMessages(dataMessages);
+    //             loadContacts();
+    //         } else {
+    //             setMessages([]);
+    //             loadContacts();
+    //         };
+    //     });
+    // };
 
     const onSendMessage = (e) => {
         if(e.key == "Enter"){
@@ -100,6 +131,17 @@ export default function ComplainAdmin() {
             e.target.value = ''
         }
     }
+    // const onSendMessage = (e) => {
+    //     if (e.key == "Enter") {
+    //         const data = {
+    //             idRecipient: contact.id,
+    //             message: e.target.value
+    //         };
+
+    //         socket.emit("send message", data);
+    //         e.target.value = "";
+    //     };
+    // };
 
     return (
         <>

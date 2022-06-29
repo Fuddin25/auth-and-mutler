@@ -72,7 +72,7 @@ export default function Complain() {
     const onClickContact = (data) => {
         setContact(data)
         // code here
-        socket.emit('load messages', data.id)
+        socket.emit('load messages', data.id) 
     }
 
     // code here
